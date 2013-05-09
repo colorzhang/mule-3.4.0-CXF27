@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:test="http://www.mulesoft.org/schema/mule/test"
+      xsi:schemaLocation="
+       http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+       http://www.mulesoft.org/schema/mule/test http://www.mulesoft.org/schema/mule/test/current/mule-test.xsd">
+
+    <endpoint name="in" address="${inbound.destination}" exchange-pattern="one-way"/>
+    <endpoint name="middle" address="${middle.destination}" exchange-pattern="one-way"/>
+    <endpoint name="middle2" address="${middle2.destination}" exchange-pattern="one-way"/>
+    <endpoint name="out" address="${outbound.destination}" exchange-pattern="one-way"/>
+
+    <gzip-compress-transformer name="Compress"/>
+    <gzip-uncompress-transformer name="Uncompress"/>
+
+    <model name="test">
+        <service name="InputPart">
+            <inbound>
+                <inbound-endpoint ref="in" />
+            </inbound>
+            <test:component/>
+            <outbound>
+                <pass-through-router>
+                    <outbound-endpoint ref="middle">
+                        <transformer ref="Compress" />
+                        <transformer ref="ObjectToJms" />
+                    </outbound-endpoint>
+                </pass-through-router>
+            </outbound>
+        </service>
+
+        <service name="MiddlePart">
+            <inbound>
+                <inbound-endpoint ref="middle">
+                    <transformer ref="Uncompress" />
+                </inbound-endpoint>
+            </inbound>
+            <test:component/>
+            <outbound>
+                <pass-through-router>
+                    <outbound-endpoint ref="middle2">
+                        <transformer ref="Compress" />
+                        <transformer ref="ObjectToJms" />
+                    </outbound-endpoint>
+                </pass-through-router>
+            </outbound>
+        </service>
+
+        <service name="OutputPart">
+            <inbound>
+                <inbound-endpoint ref="middle2">
+                    <transformer ref="Uncompress" />
+                </inbound-endpoint>
+            </inbound>
+            <test:component>
+                <test:return-data>OUTPUT MESSAGE</test:return-data>
+            </test:component>
+            <outbound>
+                <pass-through-router>
+                    <outbound-endpoint ref="out"/>
+                </pass-through-router>
+            </outbound>
+        </service>
+    </model>
+</mule>

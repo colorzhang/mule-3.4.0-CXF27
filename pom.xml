@@ -89,7 +89,7 @@
         <bshVersion>2.0b5</bshVersion>
         <bouncycastleVersion>1.48</bouncycastleVersion>
         <cglibVersion>2.2.2</cglibVersion>
-        <commonsBeanUtilsVersion>1.8.3</commonsBeanUtilsVersion>
+        <commonsBeanUtilsVersion>1.9.2</commonsBeanUtilsVersion>
         <commonsCliVersion>1.2</commonsCliVersion>
         <commonsCodecVersion>1.7</commonsCodecVersion>
         <commonsCollectionsVersion>3.2.1</commonsCollectionsVersion>

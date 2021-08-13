@@ -87,7 +87,7 @@
         <asmVersion>3.3.1</asmVersion>
         <aspectjVersion>1.7.2</aspectjVersion>
         <bshVersion>2.0b5</bshVersion>
-        <bouncycastleVersion>1.48</bouncycastleVersion>
+        <bouncycastleVersion>1.67</bouncycastleVersion>
         <cglibVersion>2.2.2</cglibVersion>
         <commonsBeanUtilsVersion>1.8.3</commonsBeanUtilsVersion>
         <commonsCliVersion>1.2</commonsCliVersion>

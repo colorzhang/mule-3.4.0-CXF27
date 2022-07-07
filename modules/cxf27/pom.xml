@@ -12,7 +12,7 @@
     <description>A Mule module for web service connectivity using CXF.</description>
 
     <properties>
-        <cxfVersion>2.7.4</cxfVersion>
+        <cxfVersion>2.7.9</cxfVersion>
     </properties>
 
     <build>
